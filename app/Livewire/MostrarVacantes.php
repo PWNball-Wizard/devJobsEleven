@@ -49,6 +49,7 @@ class MostrarVacantes extends Component
     {
         dd($datos);
         $this->notificaciones[] = $datos;
+        //!Estos som mis otros cambios bro
     }
 
     //! Evento emitido dede el componente, con wire:click="prueba({{ $vacante->id }})"
