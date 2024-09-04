@@ -40,6 +40,7 @@ class MostrarVacantes extends Component
         //dd($vacante->titulo);
         $vacante->delete();
         $this->ocultaModal();
+        //!Agregar un mensaje flash
         //session()->flash('success', 'La vacante se elimino correctamente');
     }
 
