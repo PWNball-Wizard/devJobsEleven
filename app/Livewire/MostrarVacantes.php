@@ -23,6 +23,7 @@ class MostrarVacantes extends Component
 
     public $esVisible = false;
     public array $notificaciones = [];
+    //! se agrega otro comentrario para el git
 
 
     public function muestraModal()
