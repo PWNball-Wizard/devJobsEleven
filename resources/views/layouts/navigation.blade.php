@@ -50,7 +50,41 @@
                 @endguest
                 @auth
                     @hasrole('Reclutador')
-                        <div class="relative mr-6">
+                        <div x-data="{ showNotification: false }" x-init="Echo.channel('notificaciones').listen('.Enviadas', (event) => {
+                            showNotification = true;
+                            setTimeout(() => {
+                                showNotification = false;
+                            }, 7000);
+                        });" class="relative mr-6">
+                            <!-- Icono de notificaciones -->
+                            <div class="relative">
+                                <a href="{{ route('notificaciones.index') }}">
+                                    <button class="focus:outline-none">
+                                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.917V5a3 3 0 00-6 0v.083A6.002 6.002 0 002 11v3.159c0 .538-.214 1.054-.595 1.436L0 17h15zM15 17a3 3 0 01-6 0M15 17H9m6 0H9">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </a>
+                                <!-- Indicador de notificaciones -->
+                                <span
+                                    class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                </span>
+                            </div>
+
+                            <!-- Dialogo de notificación -->
+                            <div x-show="showNotification"
+                                class="absolute top-12 left-3 mt-0 w-64 bg-white border border-gray-300 rounded-lg shadow-lg z-50 p-4">
+                                <a href="{{ route('notificaciones.index') }}">
+                                    <p class="text-sm text-gray-800">Tienes una nueva notificación</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        {{-- <div class="relative mr-6">
                             <!-- Icono de campana -->
                             <a href="{{ route('notificaciones.index') }}">
                                 <button class="focus:outline-none">
@@ -67,7 +101,7 @@
                                 class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
                                 {{ auth()->user()->unreadNotifications->count() }}
                             </span>
-                        </div>
+                        </div> --}}
                     @endhasrole
 
                     <x-dropdown align="right" width="48">

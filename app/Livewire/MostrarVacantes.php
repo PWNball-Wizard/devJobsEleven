@@ -23,6 +23,7 @@ class MostrarVacantes extends Component
 
     public $esVisible = false;
     public array $notificaciones = [];
+    public $alerta = false;
     //! se agrega otro comentrario para el git
 
 
@@ -48,8 +49,10 @@ class MostrarVacantes extends Component
     #[On('echo:notificaciones,.Enviadas')]
     public function Enviadas($datos)
     {
-        dd($datos);
+        //!dd($datos);
         $this->notificaciones[] = $datos;
+        $this->alerta = true;
+        session()->flash('alerta', 'La vacante se elimino correctamente');
         //!Estos som mis otros cambios bro
     }
 

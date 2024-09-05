@@ -55,8 +55,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Vacante::class);
     }
 
+    //! un usuario tiene muchas candidaturas o postulaciones
     public function candidatos()
     {
         return $this->hasMany(Candidato::class);
+    }
+
+    //! un usuario es un candidato
+    //$ hasOne es el inverso de belongsTo es decir si en esta tabla tenemos la llave primaria y en la otra tabla la llave foranea
+    //$ por ejemplo un usuario tiene un perfil, en la tabla de perfiles tendriamos la llave foranea del usuario
+    public function candidato()
+    {
+        return $this->hasOne(Candidato::class);
     }
 }

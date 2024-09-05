@@ -11,11 +11,13 @@ class VacantesCandidato extends Component
     public $vacantes;
     public $candidatos;
 
-    public function mount(){
+    public function mount()
+    {
         //! Pluck es un método que se utiliza para obtener una lista de valores de una columna específica de una colección.
-        
-        $this->candidatos = auth()->user()->candidatos->pluck('vacante_id');
 
+        //! 
+        $this->candidatos = auth()->user()->candidatos->pluck('vacante_id');
+        dd('Un usuario es un candidato ',auth()->user()->candidato->pluck('vacante_id'));
         //! Obtenemos las vacantes que estan publicadas menos las que tenemos en la variable candidatos
         //! es decir las que ya hemos aplicado
 

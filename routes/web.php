@@ -10,13 +10,11 @@ use App\Http\Controllers\VacanteCandidatoController;
 use App\Http\Controllers\VacanteController;
 use Illuminate\Support\Facades\Route;
 
-//$ Inicio de la aplicacion
-Route::get('/', function () {
-    return view('welcome');
-})->name('inicio');
+//$ Inicio de la aplicacion - Pantalla principal de los candidatos NUEVO
+Route::get('/', [CandidatoController::class, 'index'])->middleware(['auth', 'verified'])->name('candidatos.index');
 
 //$ Pantalla principal de los reclutadores
-Route::get('/dashboard', [VacanteController::class, 'index'])->middleware(['auth', 'verified', 'rol.reclutador'])->name('vacantes.index');
+Route::get('/vacantes', [VacanteController::class, 'index'])->middleware(['auth', 'verified', 'rol.reclutador'])->name('vacantes.index');
 //! create es diferente a store, create se refiere a la vista para crear una nueva vacante, es decir el formulario
 //! store es el metodo que se encarga de guardar la vacante en la base de datos una vez que se envia el formulario
 //! Pantallas de reclutadores
@@ -27,10 +25,10 @@ Route::get('/vacantes/{vacante}', [VacanteController::class, 'show'])->name('vac
 //$ Lista de candidatos
 Route::get('/{vacante}/candidatos', [VacanteCandidatoController::class, 'index'])->middleware(['auth', 'verified', 'rol.reclutador'])->name('vacantes.candidatos.index');
 
-//$ Dashboard para candidatos
-Route::get('/candidatos', [CandidatoController::class, 'index'])->middleware(['auth', 'verified'])->name('candidatos.index');
+//$ Dashboard para candidatos anterior
+//! Route::get('/candidatos', [CandidatoController::class, 'index'])->middleware(['auth', 'verified'])->name('candidatos.index');
 
-//!Postulaciones del candidato
+//$ Postulaciones del candidato
 Route::get('/candidatos/postulaciones', [PostulacionController::class, 'index'])->middleware(['auth', 'verified'])->name('postulaciones.index');
 //Route::get('/postulantes/{vacante}', [CandidatoController::class, 'create'])->middleware(['auth', 'verified'])->name('candidatos.create');
 

@@ -16,7 +16,7 @@ class RolUsuario
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user()->hasRole('Candidato')) {
-            return redirect()->route('inicio');
+            return redirect()->route('candidatos.index');
         }
         return $next($request);
     }
